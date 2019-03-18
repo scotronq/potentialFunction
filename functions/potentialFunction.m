@@ -17,7 +17,16 @@ function [v,theta] = potentialFunction(m)
 %   [v,theta] = potentialFunction(m);
 %   v               % should equal -288
 %
-%   Scott Ronquist, scotronq@umich.edu. 1/23/19
+%   Version 1.1 (03/18/19)
+%   Written by: Scott Ronquist
+%   Contact: 	scotronq@umich.edu
+%   Created: 	1/23/19
+%   
+%   Revision History:
+%   v1.0 (1/23/19)
+%   * potentialFunction.m created
+%   v1.1 (3/18/19)
+%   * updated and formatted for git upload
 
 %% Format m
 if size(m,2) == 1

@@ -1,6 +1,4 @@
 % Goal: find pattern in potential function with equidistant radial points
-%
-% https://mail.google.com/mail/u/0/#inbox/FMfcgxwBVMjbZTdBDwwcNxCpXGspvGrN
 % 
 
 %% set-up
