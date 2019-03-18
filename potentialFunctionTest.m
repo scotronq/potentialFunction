@@ -55,35 +55,38 @@ if plotCircleFlag
         
         % get groups of overlapping points
         thetaG = theta(G == iG);
-        count = 0;
+        thetaCount = 0;
+        extraThetaCount = 0;
         for iTheta = 1:length(thetaG)
             
+            numExtraTheta = sum(ismember(extraTheta,thetaG(iTheta)));
             % plot points on circle, extra thetas have different color
-            if ismember(thetaG(iTheta),extraTheta)
-                plot(cos(thetaG(iTheta))*(1+count*.1),...
-                    sin(thetaG(iTheta))*(1+count*.1),'mo')
+            if ismember(thetaG(iTheta),extraTheta) && extraThetaCount < numExtraTheta
+                plot(cos(thetaG(iTheta))*(1+thetaCount*.1),...
+                    sin(thetaG(iTheta))*(1+thetaCount*.1),'mo')
+                extraThetaCount = extraThetaCount + 1;
             else
-                plot(cos(thetaG(iTheta))*(1+count*.1),...
-                    sin(thetaG(iTheta))*(1+count*.1),'ro')
+                plot(cos(thetaG(iTheta))*(1+thetaCount*.1),...
+                    sin(thetaG(iTheta))*(1+thetaCount*.1),'ro')
             end
             
             % add text for position
             if iTheta == length(thetaG)
-                count = count + 1;
+                thetaCount = thetaCount + 1;
                 
                 if ismember(thetaG(iTheta), [0 pi])
-                    text(cos(thetaG(iTheta))*(1+count*.1),...
-                        sin(thetaG(iTheta))*(1+count*.1)+.1,num2str(thetaG(iTheta)))
+                    text(cos(thetaG(iTheta))*(1+thetaCount*.1),...
+                        sin(thetaG(iTheta))*(1+thetaCount*.1)+.1,num2str(thetaG(iTheta)))
                 else
-                    text(cos(thetaG(iTheta))*(1+count*.1),...
-                        sin(thetaG(iTheta))*(1+count*.1),num2str(thetaG(iTheta)))
+                    text(cos(thetaG(iTheta))*(1+thetaCount*.1),...
+                        sin(thetaG(iTheta))*(1+thetaCount*.1),num2str(thetaG(iTheta)))
                 end
             end
-            count = count + 1;
+            thetaCount = thetaCount + 1;
         end
         
         % get maximum number of points to set axis limits
-        maxCount = max([maxCount count]);
+        maxCount = max([maxCount thetaCount]);
     end
     
     % set axis limits
