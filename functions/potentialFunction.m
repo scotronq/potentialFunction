@@ -26,6 +26,7 @@ function [v] = potentialFunction(theta)
 %   * updated to just perform potential function aspect
 
 %% Calculate potential function
+theta = sort(theta,'ascend');
 v = 0;
 for i = 1:length(theta)-1
     for j = i+1:length(theta)

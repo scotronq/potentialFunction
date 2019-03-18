@@ -27,6 +27,7 @@ m = [6 2;4 3];                  % 6 equal points twice, 4 equal points 3 times
 
 plotCircleFlag = 1;             % 1=plot, 0=no plot
 extraTheta = [0, pi/4];         % input additional radial points
+varTheta = [0 pi/4];            % vary theta between these radial values
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% potential function calculation
@@ -42,7 +43,13 @@ fprintf('potential: %.2f\n',v)
 
 %% figure - plot theta on unit circle
 if plotCircleFlag
-    figure
+    if ~isempty(varTheta)
+        figure('units','normalized','position',[.1 .1 .8 .8])
+        subplot(1,2,1)
+    else
+        figure('units','normalized','position',[.1 .1 .5 .5])
+    end
+    
     circle(0,0,1), hold on, box on, axis equal
     plot([0 0], [-2 2], 'k-')
     plot([-2 2], [0 0], 'k-')
@@ -97,6 +104,34 @@ if plotCircleFlag
     title(sprintf('theta locations, v = %.3f', v))
     set(get(gca,'children'),'linewidth',2);
     set(get(gcf,'children'),'linewidth',2,'fontsize',15);
+    
+    %% add more to plot if var theta not empty
+    if ~isempty(varTheta)
+        nVarThetas = 100;
+        varTheta = sort(varTheta,'ascend');
+        varThetaVals = varTheta(1):diff(varTheta)/nVarThetas:varTheta(2);
+        v2 = zeros(length(varThetaVals),1);
+        
+        for iVarTheta = 1:length(varThetaVals)
+            v2(iVarTheta) = potentialFunction([theta,varThetaVals(iVarTheta)]);
+        end
+        
+        % add varying theta to figure
+        cometSr(cos(varThetaVals), sin(varThetaVals),.1,.01,'g')
+        
+        % create new figure of potential as varTheta varies
+        subplot(1,2,2)
+        plot(varThetaVals,v2,'g'), axis square
+        
+        % format figure
+        title('potential function as theta varies')
+        xlabel('variable theta radial position')
+        ylabel('potential (v)')
+        
+        set(get(gca,'children'),'linewidth',2);
+        set(get(gcf,'children'),'linewidth',2,'fontsize',15);
+        
+    end
 end
 
 
