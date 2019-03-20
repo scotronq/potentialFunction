@@ -1,7 +1,7 @@
 % Goal: find pattern in potential function with equidistant radial points
 % 
 %
-%   Version 1.2 (03/19/19)
+%   Version 1.1 (03/18/19)
 %   Written by: Scott Ronquist
 %   Contact: 	scotronq@umich.edu
 %   Created: 	1/23/19
@@ -11,10 +11,9 @@
 %   * potentialFunctionTest.m created
 %   v1.1 (3/18/19)
 %   * updated and formatted for git upload
-%   * include option to specify specific theta values
+%   * include option to specify specific theta
 %   v1.2 (3/19/19)
 %   * include local minima/maxima on variable theta plot
-%   * larger font in figures
 
 %% set-up
 clear
@@ -86,12 +85,10 @@ if plotCircleFlag
                 
                 if ismember(thetaG(iTheta), [0 pi])
                     text(cos(thetaG(iTheta))*(1+thetaCount*.1),...
-                        sin(thetaG(iTheta))*(1+thetaCount*.1)+.1,...
-                        num2str(thetaG(iTheta)),'fontsize',15)
+                        sin(thetaG(iTheta))*(1+thetaCount*.1)+.1,num2str(thetaG(iTheta)))
                 else
                     text(cos(thetaG(iTheta))*(1+thetaCount*.1),...
-                        sin(thetaG(iTheta))*(1+thetaCount*.1),...
-                        num2str(thetaG(iTheta)),'fontsize',15)
+                        sin(thetaG(iTheta))*(1+thetaCount*.1),num2str(thetaG(iTheta)))
                 end
             end
             thetaCount = thetaCount + 1;
@@ -137,9 +134,7 @@ if plotCircleFlag
         for iLoc = 1:length(v2Peaks)
             plot(varThetaVals(v2Peaks(iLoc)), v2(v2Peaks(iLoc)), 'r*')
             text(varThetaVals(v2Peaks(iLoc)), v2(v2Peaks(iLoc)),...
-                sprintf('\\theta=%.4f\nv=%.4f',...
-                varThetaVals(v2Peaks(iLoc)), v2(v2Peaks(iLoc))),...
-                'fontsize',15)
+                sprintf('\theta: ',))
         end
         
         % format figure
